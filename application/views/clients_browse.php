@@ -1,13 +1,18 @@
 <?php
     $template = $this->config->item("template");
     include($template["folder"] . "/header.php");
+
+$title = "Clients list";
+if(isset($search_term)) {
+    $title = "Result for \"" . $search_term . "\".";
+}
 ?>
 
 <div class="container bs-docs-container">
     
     <div class="row">
         <div class="col-md-12" role="main">
-            <h2 class="page-header" style="margin: 0;">Clients list</h1>
+            <h2 class="page-header" style="margin: 0;"><?php echo $title; ?></h1>
             
             
             <table class="table table-striped">

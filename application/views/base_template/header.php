@@ -69,10 +69,10 @@
                         <li><a href="#">Log-out</a></li>
                     </ul>-->
                     
-                    <form class="navbar-form navbar-right" role="search">
+                    <form class="navbar-form navbar-right" role="search" action="/" method="POST">
                     
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Search client">
+                            <input type="text" class="form-control" name="search" placeholder="Search client">
                         </div>
                         <button type="submit" class="btn btn-default">Search</button>
                         

@@ -8,7 +8,7 @@ include($template["folder"] . "/header.php");
 
 
 
-<div class="container bs-docs-container">
+<div class="container">
     
     <div class="row">
         <div class="col-md-12" role="main">

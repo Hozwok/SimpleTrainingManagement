@@ -42,8 +42,9 @@ class Clients extends CI_Controller {
 	    if($client->num_rows() == 0) //No client found.
 	        redirect('/clients/browse');
 	        
-	        
-	    $this->load->view("client_detail", array("client"=>$client));
+	    $classes = $this->Model_clients->get_client_classes($id);
+	    
+	    $this->load->view("client_detail", array("client"=>$client, "classes" => $classes));
 	   
 	}
     
@@ -126,6 +127,17 @@ class Clients extends CI_Controller {
 	        
 	    }
 	   
+        
+        function add_class($client_id) {
+            
+            if(!is_numeric($id)) // No numeric client id
+	            redirect('/clients/browse');
+	        
+	        
+	        
+            
+            
+        }
 	   
 	}
     
