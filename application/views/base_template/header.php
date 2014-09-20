@@ -39,23 +39,35 @@
     
                 <div class="collapse navbar-collapse" id="navbar-detailed-actions">
                     <ul class="nav navbar-nav">
-                        <li><a href="#">Client</a></li>
-                        <li><a href="#">Classes</a></li>
+                        <li><a href="#" class="dropdown-toggle" data-toggle="dropdown">Clients <span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="/clients/browse">Browse</a></li>
+                                <li><a href="/clients/form">Add new</a></li>
+                            </ul>
+                        </li>
+                        
+                        <li><a href="#" class="dropdown-toggle" data-toggle="dropdown">Classes <span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="/classes/browse">Browse</a></li>
+                                <li><a href="/classes/form">Add new</a></li>
+                            </ul>
+                        </li>
+                        
                         
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Actions <span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="#">Show current classes</a></li>
-                                <li><a href="#">Unpaid bills</a></li>
+                                <li><a href="/act/current">Show current classes</a></li>
+                                <li><a href="/act/unpaid">Unpaid bills</a></li>
                             </ul>
                         </li>
                     </ul>
                     
                    
                     
-                    <ul class="nav navbar-nav navbar-right">
+                    <!--<ul class="nav navbar-nav navbar-right">
                         <li><a href="#">Log-out</a></li>
-                    </ul>
+                    </ul>-->
                     
                     <form class="navbar-form navbar-right" role="search">
                     
