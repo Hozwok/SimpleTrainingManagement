@@ -20,8 +20,11 @@ $client_data = $client->row();
             
 
     			    <div class="row col-md-6" style=" float: none; margin: 20px auto; ">
-    			    
+    			        
+    			        <a href="/clients/delete/<?php echo $client_data->ID; ?>"><button class="btn btn-default" style="float:right; margin:0 0 0 10px;">Delete</button></a>
+    			    	
     			    	<a href="/clients/form/<?php echo $client_data->ID; ?>"><button class="btn btn-default" style="float:right; margin:0;">Edit</button></a>
+    			    	
     				    <div style="clear:both;"></div>
     				    
         			    <div class="row">

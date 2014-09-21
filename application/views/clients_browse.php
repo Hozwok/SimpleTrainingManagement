@@ -6,22 +6,29 @@ $title = "Clients list";
 if(isset($search_term)) {
     $title = "Result for \"" . $search_term . "\".";
 }
+
+$error = $this->session->flashdata('error');
+$info  = $this->session->flashdata('info');
+
 ?>
 
-<div class="container bs-docs-container">
+<div class="container">
     
     <div class="row">
         <div class="col-md-12" role="main">
+            <?php
+            if (strlen($error)>0) {
+                echo '<div class="alert alert-warning" role="alert">'.$error.'</div>';
+            }
+            if (strlen($info)>0) {
+                echo '<div class="alert alert-info" role="alert">'.$info.'</div>';
+            }
+            ?>
             <h2 class="page-header" style="margin: 0;"><?php echo $title; ?></h1>
             
             
             <table class="table table-striped">
-               <!-- <colgroup>
-                    <col class="col-md-3 col-xs-4">
-                    <col class="col-md-3 col-xs-4">
-                    <col class="col-md-3">
-                    <col class="col-md-3 col-xs-4">
-                </colgroup>-->
+               
                 <thead>
             		<tr>
             			
@@ -43,7 +50,7 @@ if(isset($search_term)) {
                         echo '<td>'.$client->firstname.'</td>';
                         echo '<td>'.$client->lastname.'</td>';
                         echo '<td>'.$client->email.'</td>';
-                        echo '<td><a href="/clients/view/' . $client->ID . '"><button style="float:right;" class="btn btn-small">View</button></a></td>';
+                        echo '<td><a href="/clients/view/' . $client->ID . '"><button style="float:right;" class="btn btn-xs">View</button></a></td>';
                         echo '</tr>';
                         
                     }
