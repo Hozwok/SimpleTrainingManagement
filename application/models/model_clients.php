@@ -11,7 +11,7 @@ class Model_clients extends CI_Model {
  	
     function get_all() {
         
-        return $this->db->get("clients");
+        return $this->db->get_where("clients", array("deleted"=>0));
         
     }
     
@@ -44,8 +44,10 @@ class Model_clients extends CI_Model {
        
         if(isset($data["ID"])) //ID column is AUTO INCREMENT
             unset($data["ID"]);
-            
-        $res = $this->db->insert("clients", $data);
+        
+        $this->db->insert("clients", $data);
+        
+        $res =  $this->db->insert_id();
         
         return $res;
         
@@ -63,6 +65,7 @@ class Model_clients extends CI_Model {
         
         return $this->db->select("*")
                  ->from("clients")
+                 ->where("deleted", 0)
                  ->like("CONCAT(firstname, ' ', lastname)", $term)
                  ->or_like("CONCAT(lastname, ' ', firstname)", $term)
                  ->get();
@@ -89,6 +92,41 @@ class Model_clients extends CI_Model {
     }
     
     // ------------------------------------------------------------------------
+    
+    function link_class($client_id, $class_id) {
+        
+        if(!is_numeric($client_id) || !is_numeric($class_id))
+            return false;
+        
+        $data = array();
+        $data["id_class"]  = $class_id;
+        $data["id_client"] = $client_id;
+        
+        $ext = $this->db->get_where("records", $data);
+        
+        if($ext->num_rows()>0) //link already existent
+            return false;
+            
+        
+        $this->db->insert("records", $data);
+        
+        $res = $this->db->insert_id();
+        
+        return $res;
+        
+    }
+    
+    // ------------------------------------------------------------------------
+    
+    function delete($id) {
+        
+        if (!is_numeric($id))
+            return false;
+            
+        $this->db->where("ID", $id)
+                 ->update("clients", array("deleted"=>1));
+                 
+        return true;
+    }
   
 }
-

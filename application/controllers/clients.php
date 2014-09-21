@@ -68,13 +68,18 @@ class Clients extends CI_Controller {
                 $client_data["lastname"]    = $this->input->post("lastname");
                 $client_data["email"]       = $this->input->post("email");
                 $client_data["postcode"]    = $this->input->post("postcode");
-
+                
+                if (strlen($client_data["firstname"]) < 1 || strlen($client_data["lastname"]) < 1) {
+                    $this->session->set_flashdata('error', 'First and Last name are mandatory.');
+                    redirect('/clients/browse', 'refresh');
+                }
+                
 	            $res_id = $this->Model_clients->add($client_data);
 	            
 	            if($res_id !== false && is_numeric($res_id) && $res_id>0) {
-	                //client added : faslhmessage : ok
+	                $this->session->set_flashdata('info', 'Client added successfully.');
 	            } else {
-	                //error: flashmessage
+	                $this->session->set_flashdata('error', 'Error while adding new client.');
 	            }
 	            
 	            redirect('/clients/browse', 'refresh');
@@ -96,11 +101,16 @@ class Clients extends CI_Controller {
                 $client_data["lastname"]    = $this->input->post("lastname");
                 $client_data["email"]       = $this->input->post("email");
                 $client_data["postcode"]    = $this->input->post("postcode");
-
+                
+                if (strlen($client_data["firstname"]) < 1 || strlen($client_data["lastname"]) < 1) {
+                    $this->session->set_flashdata('error', 'First and Last name are mandatory.');
+                    redirect('/clients/browse', 'refresh');
+                }
+                
 	            if($this->Model_clients->update($id, $client_data)) {
-	                //flashmessage : OK
+	                $this->session->set_flashdata('info', 'Client updated successfully.');
 	            } else {
-	                //fashmessage : error!
+	                $this->session->set_flashdata('error', 'Error while updating client info.');
 	            }
 	            
 	            redirect('/clients/browse');
@@ -127,19 +137,68 @@ class Clients extends CI_Controller {
 	        
 	    }
 	   
+    }
+
+    function add_class($client_id, $class_id = false) {
+       
+        if(!is_numeric($client_id)) // No numeric client id
+            redirect('/clients/browse');
         
-        function add_class($client_id) {
+        $this->load->model("Model_classes");
+        
+        $client = $this->Model_clients->get($client_id);
+        
+        if($client->num_rows() == 0)
+            redirect('/clients/browse');
+           
+        if (is_numeric($class_id)) { //we are gonna add the relationship
+            $res = $this->Model_clients->link_class($client_id, $class_id);
             
-            if(!is_numeric($id)) // No numeric client id
-	            redirect('/clients/browse');
-	        
-	        
-	        
+            if ($res) {
+                $this->session->set_flashdata('info', 'Class linked to client successfully.');
+	        } else {
+	            $this->session->set_flashdata('error', 'Error while linking class. Maybe already linked?');
+	        }
             
+            redirect("/clients/browse");
             
+        } else { //first time load. Let the user choose which class
+            
+            $classes = $this->Model_classes->get_all();
+            
+            $this->load->view("classes_list", array("classes" => $classes, "client" => $client));
+    	        
         }
+        
+    }
 	   
+	   
+	function delete($id) {
+	    
+	    $client = $this->Model_clients->get($id);
+       
+        if ($client->num_rows() == 0)
+            redirect('/clients/browse');
+            
+            
+	    if ($_POST) {
+	        $res = $this->Model_clients->delete($id);
+	        
+	        if ($res)
+	            $this->session->set_flashdata('info', 'Client deleted successfully.');
+	        else
+	            $this->session->set_flashdata('error', 'Error while deleting client.');
+	        
+	        redirect('/clients/browse/');
+	        
+	    } else {
+	        $this->load->view("client_delete", array("client" => $client));
+	    }
+	    
+	    
 	}
+
+
     
     
     
