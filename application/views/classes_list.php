@@ -14,12 +14,27 @@ if (isset($client)) {
     $choose_mode = true;
 }
 
+
+$error = $this->session->flashdata('error');
+$info  = $this->session->flashdata('info');
+
+
 ?>
 
 <div class="container">
     
     <div class="row">
         <div class="col-md-12" role="main">
+        
+            <?php
+            if (strlen($error)>0) {
+                echo '<div class="alert alert-warning" role="alert">'.$error.'</div>';
+            }
+            if (strlen($info)>0) {
+                echo '<div class="alert alert-info" role="alert">'.$info.'</div>';
+            }
+            ?>
+            
             <h2 class="page-header" style="margin: 0;"><?php echo $title; ?></h1>
             
             
