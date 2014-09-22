@@ -1,10 +1,5 @@
 <?php
 
-/*
-    Autor: Hozwok
-    
-    Description: a simple model for clients
-*/
 
 class Model_clients extends CI_Model {
 

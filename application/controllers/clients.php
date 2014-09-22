@@ -71,7 +71,7 @@ class Clients extends CI_Controller {
                 
                 if (strlen($client_data["firstname"]) < 1 || strlen($client_data["lastname"]) < 1) {
                     $this->session->set_flashdata('error', 'First and Last name are mandatory.');
-                    redirect('/clients/browse', 'refresh');
+                    redirect('/clients/browse');
                 }
                 
 	            $res_id = $this->Model_clients->add($client_data);
@@ -82,7 +82,7 @@ class Clients extends CI_Controller {
 	                $this->session->set_flashdata('error', 'Error while adding new client.');
 	            }
 	            
-	            redirect('/clients/browse', 'refresh');
+	            redirect('/clients/browse');
 	            
 	        } else {
 	            
@@ -104,7 +104,7 @@ class Clients extends CI_Controller {
                 
                 if (strlen($client_data["firstname"]) < 1 || strlen($client_data["lastname"]) < 1) {
                     $this->session->set_flashdata('error', 'First and Last name are mandatory.');
-                    redirect('/clients/browse', 'refresh');
+                    redirect('/clients/browse');
                 }
                 
 	            if($this->Model_clients->update($id, $client_data)) {

@@ -12,12 +12,12 @@
         <!-- We are using bootstrap .. so link it  -->
         <link rel="stylesheet" href="/css/bootstrap.min.css">
         <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
+        <link href="/css/jquery-ui.min.css" rel="stylesheet">
         
         
         <script src="/js/jquery-1.11.1.min.js"></script>
         <script src="/js/bootstrap.min.js"></script>
-        
-        
+        <script src="/js/jquery-ui.min.js"></script>
     </head>
     
     <body>
@@ -54,18 +54,20 @@
                         </li>
                         
                         
+                        <!-- TODO : Reason: no time left.. 
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Actions <span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="/act/current">Show current classes</a></li>
                                 <li><a href="/act/unpaid">Unpaid bills</a></li>
                             </ul>
-                        </li>
+                        </li>-->
                     </ul>
                     
                    
                     
-                    <!--<ul class="nav navbar-nav navbar-right">
+                    <!-- TODO: login: no time left..
+                    <ul class="nav navbar-nav navbar-right">
                         <li><a href="#">Log-out</a></li>
                     </ul>-->
                     
